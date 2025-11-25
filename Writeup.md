@@ -34,7 +34,7 @@ Invalid parameter… accessID
 
 Whenever a page references a parameter by name, it’s often a sign that fuzzing the parameter may trigger alternative logic or responses.
 
-4 — Parameter Fuzzing accessID → Found “getaccess”
+4 — Parameter Fuzzing accessID → Found “**getaccess**”
 
 I fuzzed the accessID parameter with ffuf:
 
@@ -43,13 +43,15 @@ I fuzzed the accessID parameter with ffuf:
 This revealed: getaccess
 
 Accessing it returned a hint instructing me to visit a virtual host:
-Go to fuzzing_fun.htb
+Go to **fuzzing_fun.htb**
 
 This was the key moment: The site was virtual host–based, meaning the correct Host header was required.
 
 5 — Adding fuzzing_fun.htb to /etc/hosts
 
 To make the virtual host resolve correctly, I added it manually:
+**sudo nano /etc/hosts**
+
 //ss
 
 This allowed the server to respond with the content intended for that hostname.
